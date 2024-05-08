@@ -60,6 +60,7 @@ function App() {
     async (account) => {
       try {
         let balance = await web3.eth.getBalance(account); // returns balance in wei
+
         balance = web3.utils.fromWei(balance, "ether"); // convert to ether
         setBalance(balance);
       } catch (e) {
@@ -77,16 +78,21 @@ function App() {
         {accounts.length > 0 && (
           <>
             <h2>Successfully connected to Metamask Wallet</h2>
-            <h3>Connected to account: {accounts[0]}</h3>
-            <h3>Balance: {balance}eth</h3>
-            <button
-              className="button"
-              onClick={() => {
-                getBalance(accounts[0]);
-              }}
-            >
-              Get balance
-            </button>
+            <div className="card">
+              <h3>Account Details</h3>
+              <h5>Address: {accounts[0]}</h5>
+            </div>
+            <div className="card">
+              <h3>Balance (eth): {balance}</h3>
+              <button
+                className="button"
+                onClick={() => {
+                  getBalance(accounts[0]);
+                }}
+              >
+                Get balance
+              </button>
+            </div>
             <br />
             <button className="button" onClick={disconnectWallet}>
               Disconnect Your Metamask Wallet
@@ -94,7 +100,7 @@ function App() {
           </>
         )}
         {accounts.length === 0 && (
-          <button className="button" onClick={connectWallet}>
+          <button className="button-large" onClick={connectWallet}>
             Connect Your Metamask Wallet
           </button>
         )}

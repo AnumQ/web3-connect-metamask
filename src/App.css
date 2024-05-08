@@ -12,7 +12,7 @@ main {
   flex-direction: column;
 }
 
-.button {
+.button-large {
   padding: 2rem;
   background-color: rgb(57 43 57);
   color: #e0e3e4;
@@ -21,6 +21,28 @@ main {
   border-radius: 0.2rem;
 }
 
-.button:hover {
+.button-large:hover {
   cursor: pointer;
+}
+
+.button {
+  padding: 0.5rem;
+  background-color: rgb(77, 60, 77);
+  color: #e0e3e4;
+  border: none;
+  font-size: 1rem;
+  border-radius: 0.2rem;
+}
+
+.card {
+  margin-bottom: 1rem;
+  min-width: 90vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid grey;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  border-radius: 10px;
 }
