@@ -44,7 +44,6 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header"></header>
       <main>
         <p>{error && <span>{error}</span>}</p>
         {web3 && accounts.length > 0 && (
