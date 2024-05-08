@@ -8,23 +8,22 @@ function App() {
   const [error, setError] = useState(null);
   const [balance, setBalance] = useState(null);
 
-  // ethereum is the object injected as property on the window object by Ethereum-enabled browser extensions like MetaMask.
-  const MetaMask = window.ethereum;
-
   useEffect(() => {
-    if (MetaMask) {
-      const web3Instance = new Web3(MetaMask);
+    // ethereum is the object injected as property on the window object by Ethereum-enabled browser extensions like MetaMask.
+    if (window.ethereum) {
+      // initialize web3
+      const web3Instance = new Web3(window.ethereum);
       setWeb3(web3Instance);
     }
-  }, [MetaMask]);
+  }, []);
 
   const connectWallet = useCallback(async () => {
     // Modern dapp browsers
-    if (MetaMask) {
+    if (window.ethereum) {
       // Requst account access
       try {
         // https://docs.metamask.io/wallet/reference/eth_accounts/
-        const accounts = await MetaMask.request({
+        const accounts = await window.ethereum.request({
           method: "eth_requestAccounts",
           params: [],
         });
@@ -40,10 +39,10 @@ function App() {
         "Non-Ethereum browser detected. Install Metamask on browser and try again."
       );
     }
-  }, [MetaMask]);
+  }, []);
 
   const disconnectWallet = useCallback(async () => {
-    await MetaMask.request({
+    await window.ethereum.request({
       method: "wallet_revokePermissions",
       params: [
         {
@@ -53,14 +52,13 @@ function App() {
     });
 
     setAccounts([]);
-  }, [MetaMask]);
+  }, []);
 
-  // Get account balance
+  // Get account balance using Web3.js
   const getBalance = useCallback(
     async (account) => {
       try {
         let balance = await web3.eth.getBalance(account); // returns balance in wei
-
         balance = web3.utils.fromWei(balance, "ether"); // convert to ether
         setBalance(balance);
       } catch (e) {
