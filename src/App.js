@@ -56,16 +56,19 @@ function App() {
   }, [MetaMask]);
 
   // Get account balance
-  async function getBalance(account) {
-    try {
-      let balance = await web3.eth.getBalance(account); // returns balance in wei
-      balance = web3.utils.fromWei(balance, "ether"); // convert to ether
-      setBalance(balance);
-    } catch (e) {
-      setError("Error getting balance. See console output for details");
-      console.error("Errong getting balance. Details: ", e);
-    }
-  }
+  const getBalance = useCallback(
+    async (account) => {
+      try {
+        let balance = await web3.eth.getBalance(account); // returns balance in wei
+        balance = web3.utils.fromWei(balance, "ether"); // convert to ether
+        setBalance(balance);
+      } catch (e) {
+        setError("Error getting balance. See console output for details");
+        console.error("Errong getting balance. Details: ", e);
+      }
+    },
+    [web3]
+  );
 
   return (
     <div className="App">
