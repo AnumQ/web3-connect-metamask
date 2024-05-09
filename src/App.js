@@ -19,14 +19,15 @@ function App() {
 
   const connectWallet = useCallback(async () => {
     // Modern dapp browsers
-    if (window.ethereum) {
+    if (web3) {
       // Requst account access
       try {
         // https://docs.metamask.io/wallet/reference/eth_accounts/
-        const accounts = await window.ethereum.request({
-          method: "eth_requestAccounts",
-          params: [],
-        });
+        // const accounts = await window.ethereum.request({
+        //   method: "eth_requestAccounts",
+        //   params: [],
+        // });
+        const accounts = await web3.eth.getAccounts();
         setAccounts(accounts);
       } catch (e) {
         setError(
@@ -35,11 +36,9 @@ function App() {
         console.error("Error connecting to Metamask ", e);
       }
     } else {
-      setError(
-        "Non-Ethereum browser detected. Install Metamask on browser and try again."
-      );
+      setError("Web 3 is null");
     }
-  }, []);
+  }, [web3]);
 
   const disconnectWallet = useCallback(async () => {
     await window.ethereum.request({
@@ -50,7 +49,6 @@ function App() {
         },
       ],
     });
-
     setAccounts([]);
   }, []);
 
