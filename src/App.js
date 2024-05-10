@@ -33,7 +33,6 @@ function App() {
         // });
         //This method will request/enable the accounts from the current environment it is running (Metamask, Status or Mist).
         const accounts = await web3.eth.requestAccounts();
-        console.log(accounts);
         setAccounts(accounts);
       } catch (e) {
         setError(
@@ -42,7 +41,7 @@ function App() {
         console.error("Error connecting to Metamask ", e);
       }
     } else {
-      setError("Web 3 is null");
+      setError("Web 3 is not initialized");
     }
   }, [web3]);
 
