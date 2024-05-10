@@ -31,7 +31,9 @@ function App() {
         //   method: "eth_requestAccounts",
         //   params: [],
         // });
-        const accounts = await web3.eth.getAccounts();
+        //This method will request/enable the accounts from the current environment it is running (Metamask, Status or Mist).
+        const accounts = await web3.eth.requestAccounts();
+        console.log(accounts);
         setAccounts(accounts);
       } catch (e) {
         setError(
@@ -100,7 +102,12 @@ function App() {
           </>
         )}
         {accounts.length === 0 && (
-          <button className="button-large" onClick={connectWallet}>
+          <button
+            className="button-large"
+            onClick={async () => {
+              await connectWallet();
+            }}
+          >
             Connect Your Metamask Wallet
           </button>
         )}
