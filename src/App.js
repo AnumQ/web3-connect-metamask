@@ -26,12 +26,6 @@ function App() {
     if (web3) {
       // Requst account access
       try {
-        // https://docs.metamask.io/wallet/reference/eth_accounts/
-        // const accounts = await window.ethereum.request({
-        //   method: "eth_requestAccounts",
-        //   params: [],
-        // });
-        //This method will request/enable the accounts from the current environment it is running (Metamask, Status or Mist).
         const accounts = await web3.eth.requestAccounts();
         setAccounts(accounts);
       } catch (e) {
