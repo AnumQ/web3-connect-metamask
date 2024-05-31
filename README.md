@@ -1,6 +1,6 @@
 # web3-connect-metamask
 
-A react app which integrates web3.js and allows connects to MetaMask wallet to interact with the blockchain.
+A react app that uses web3.js to connect with MetaMask wallet in order to interact with the blockchain.
 
 
 
